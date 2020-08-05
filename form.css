@@ -1,0 +1,10 @@
+.form {
+    background-color: honeydew;
+    display: flex;
+    flex-flow: column wrap;
+    margin: 0 100px;
+    justify-content: center;
+}
+.header {
+    
+}
