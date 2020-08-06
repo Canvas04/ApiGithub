@@ -11,6 +11,7 @@ export class View {
         this.searchLine.append(this.searchInput);
         this.searchLine.append(this.searchCounter);
 
+this.mes
 
         this.usersWrapper = this.createElement('div', 'users-wrapper');
         this.usersList = this.createElement('ul', 'users');

@@ -23,17 +23,19 @@ export class Search {
 
     }
 
-    usersRequest(searchValue) {
-        this.api.loadUsers(searchValue, this.currentPage).then((res) => {
-            if (res.ok) {
-                this.setCurrentPage(this.currentPage + 1);
+    async usersRequest(searchValue) {
+        try {
+            await this.api.loadUsers(searchValue, this.currentPage).then((res) => {
                 res.json().then(res => {
-                    res.items.forEach(user => this.view.createUser(user))
+                    res.items.forEach(user => this.view.createUser(user));
+                    this.setCurrentPage(this.currentPage + 1);
                 })
-            } else {
+            })
+        } catch (e) {
+console.log('Error ' + e)
+        }
 
-            }
-        })
+
     }
 
     clearUsers() {
