@@ -3,7 +3,7 @@ export class Search {
     setCurrentPage(pageNumber) {
         this.currentPage = pageNumber;
     }
-    constructor(view,api) {
+    constructor(view, api) {
         this.api = api;
         this.view = view;
         this.view.searchInput.addEventListener('keyup', this.debounce(this.loadUsers.bind(this), 300));
@@ -11,27 +11,29 @@ export class Search {
     }
 
 
-     loadUsers() {
+    loadUsers() {
         const searchValue = this.view.searchInput.value;
-        if (searchValue) {
-            this.api.loadUsers(searchValue,this.currentPage).then((res) => {
-                if (res.ok) {
-                    this.setCurrentPage(this.currentPage + 1);
-                    res.json().then(res => {
-                        res.items.forEach(user => this.view.createUser(user))
-                    })
-                } else {
-
-                }
-            })
+        this.setCurrentPage(1);
+        if (this.view.searchInput.value) {
+            this.clearUsers();
+            this.usersRequest(this.view.searchInput.value);
         } else {
             this.clearUsers();
         }
 
     }
 
-    usersRequest() {
+    usersRequest(searchValue) {
+        this.api.loadUsers(searchValue, this.currentPage).then((res) => {
+            if (res.ok) {
+                this.setCurrentPage(this.currentPage + 1);
+                res.json().then(res => {
+                    res.items.forEach(user => this.view.createUser(user))
+                })
+            } else {
 
+            }
+        })
     }
 
     clearUsers() {
