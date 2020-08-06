@@ -1,4 +1,0 @@
-
-
-
-new Search(new View());
